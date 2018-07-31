@@ -3,7 +3,8 @@ function soln = euler
 	conf = Configuration();
 
 	conf.model = Model.CNS;
-	conf.solver = Flux.Euler.Roe;
+	%conf.solver = Flux.Euler.Roe;
+	conf.solver = Flux.LaxFr;
 	conf.timeInt = @TimeIntegration.FE;
 	conf.tMax = 5;
 	conf.CFL = 0.9;
@@ -11,14 +12,12 @@ function soln = euler
 		
 	% 1D example
 	function ret = initial(x)
-		%rho = 1 + (x>0);
-		%u = 3 - 2*(x>0);
 		rho = 0.2/(1+x.^2);
 		u = -0.4/(1+x.^2)^2;
 		v = zeros(size(x));
 		p = ones(size(x));
-		[m1, m2] = conf.model.primToCons(rho, u, v);
-		ret = [rho; m1; m2];
+        [m1, m2, e] = conf.model.primToCons(rho, u, v, p);
+		ret = [rho; m1; m2; e];
     end
 
 
