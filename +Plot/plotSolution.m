@@ -48,7 +48,9 @@ function plotSolution( soln, ulim, varname, f, plotDiff )
 	fig = figure();	
 	for itr = 1 : soln.end()
 		[t, U] = soln.get(itr);		
-		u = model.getVariable(soln, U, varname);
+		%!M! do not restrict u to one variable
+        %u = model.getVariable(soln, U, varname);
+        u = U
 		if nargin >= 4
 			V = soln.mesh.evalFunc(@(varargin) f(t,varargin{:}), soln.config.useCellAvg);
 			v = model.getVariable(soln, V, varname);

@@ -37,8 +37,9 @@ function plotFrame( soln, U, t, zLim, fig, varname, varargin )
 	
 	function doPlotFrame(u)
 		% Ignore all but the first component
-		u = u(1,:,:);
-		
+		%!M!
+        %u = u(1,:,:);
+        
 		% TODO: This is a quick fix
 		if isa(mesh, 'Mesh.Tri')
 			plotstyle = Plot.plotstyle();
@@ -102,8 +103,9 @@ function plotFrame( soln, U, t, zLim, fig, varname, varargin )
 
 		elseif mesh.ndims == 1
 			% 1D data
-
-			plot(mesh.x, u, varargin{:});
+			%plot(mesh.x, u, varargin{:});
+            %size(uaux)
+            plot(mesh.x, u(1,:,:),mesh.x,u(2,:,:)./u(1,:,:));
 			if fixedAxis
 				ylim(zLim);
 			end
