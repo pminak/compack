@@ -2,7 +2,7 @@ classdef CNS < Model.ModelBase
 	%Euler   Euler equations
 	
 	properties (SetAccess = private)
-		name = 'Euler'
+		name = 'CNS'
 		nelem = 4
 	end
 	
@@ -23,7 +23,7 @@ classdef CNS < Model.ModelBase
 				uD.*m(1,:); 
 				uD.*m(2,:); 
 				(E+p).*uD];
-			ret(d+1,:) = ret(d+1,:) + p;
+			ret(d+1,:) = ret(d+1,:) ;
 			ret = reshape(ret, size(U));
 		end
 				
@@ -51,9 +51,9 @@ classdef CNS < Model.ModelBase
 			m1 = rho.*u;
 			m2 = rho.*v;
 			E = p/(o.gamma-1) + 0.5*rho.*(u.*u+v.*v);
-		end
-		
-				
+        end
+
+ 
 		% pressure()
 		% Returns the pressure p of the solution U
 		function p = pressure(o, U)

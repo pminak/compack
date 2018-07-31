@@ -49,7 +49,14 @@ function soln = runSolver( config )
 	U = updateBoundary(U, t);
 	soln.pushSolution(U, t);
 	
-	
+% 	%FINITE DIFFERENCE     
+%     un = ones(N,1);
+%     % 3 - stencil periodic laplacian
+%     Aper = 1./((dx)^2)*spdiags([un,-2*un,un],-1:1,N,N);
+%     %that is the way we impose periodicBC on or elliptic equations 
+%     Aper(1,end) = 1/((dx)^2);
+%     Aper(end,1) = 1/((dx)^2);
+%     
 	%% Run the main loop
 	while t < config.tMax		
 		% Check if a value is inf or NaN
@@ -76,7 +83,21 @@ function soln = runSolver( config )
 
 		% Propagate the solution in time
 		UNext = timeInt(@flux.netFlux, U, t, dt, updateBoundary);
-		
+
+
+%         % ADD DIFFUSION TO THE MOMENTUM EQUATION (CNS)
+%         disp('Size U')
+%         
+%         size(U)
+%         
+%         U(2,:)
+%         U(3,:)
+%         
+%            %Viscous velocity update
+%         u = q./r; %version without diffusion
+%         nu = 1;%ep;
+%         u = (spdiags(r,0,N,N) - nu*dt.*Aper)\q;
+  
 		% Update solution
 		soln.pushSolution(UNext, tNext);
 		U = UNext;
