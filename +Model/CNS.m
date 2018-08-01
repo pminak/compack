@@ -12,8 +12,8 @@ classdef CNS < Model.ModelBase
 	
 	
 	methods
-		function ret = f(o, U, d)
-			rho = U(1,:);
+		function ret = f(o, U, d)% fluxy
+			rho = U(1,:);%
 			m = U(2:3,:);
 			E = U(4,:);
 			p = (o.gamma - 1) * (E - 0.5*sum(m.^2) ./ rho);

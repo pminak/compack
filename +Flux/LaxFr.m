@@ -7,7 +7,7 @@ classdef LaxFr < Flux.NumFlux
 	end
 	
 	methods
-		function ret = F(o, d, Ul, Ur, t, dt, varargin)
+		function ret = F(o, d, Ul, Ur, t, dt, varargin)% numerical flux
 			dx = o.mesh.dx{d};
 			ret = 0.5*(o.f(Ul,d) + o.f(Ur,d)) - 0.5/o.mesh.ndims*(dx/dt).*(Ur-Ul);
 		end

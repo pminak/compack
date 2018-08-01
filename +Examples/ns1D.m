@@ -4,7 +4,7 @@ function soln = euler
 
 	conf.model = Model.CNS;
 	%conf.solver = Flux.Euler.Roe;
-	conf.solver = Flux.LaxFr;
+	conf.solver = Flux.LaxFr; %global Lax Fr 
 	%conf.solver = Flux.Central;
     conf.timeInt = @TimeIntegration.FE;
 	conf.tMax = 5;
