@@ -12,10 +12,12 @@ classdef CNS < Model.ModelBase
 	
 	
 	methods
+        %thre we define anlytical flux
+        %we can not define derivatives wrt x here
 		function ret = f(o, U, d)% fluxy
-			rho = U(1,:);%
+			rho = U(1,:);
 			m = U(2:3,:);
-			E = U(4,:);
+			E = U(4,:);%TODO: change to porous media
 			p = (o.gamma - 1) * (E - 0.5*sum(m.^2) ./ rho);
 			uD = m(d,:) ./ rho;	% Speed in d-direction
 			
@@ -70,7 +72,7 @@ classdef CNS < Model.ModelBase
 			u = m ./ rho;
 			p = o.pressure(U);
 			c = sqrt(o.gamma * p./rho);
-			ret = abs(u) + c;
+			ret = abs(u);% + c; %!M!
 		end
 	end
 	

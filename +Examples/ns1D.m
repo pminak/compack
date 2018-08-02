@@ -1,4 +1,4 @@
-function soln = euler
+function soln = ns
 	%% Set configurations
 	conf = Configuration();
 
@@ -14,7 +14,8 @@ function soln = euler
 	% 1D example
 	function ret = initial(x)
 		rho = 0.2/(1+x.^2);
-		u = -0.4*x./(1+x.^2)^2;
+        c = -1.;
+        u = -c*0.4*x./(1+x.^2)^2;
 		v = zeros(size(x));
 		p = ones(size(x));
         [m1, m2, e] = conf.model.primToCons(rho, u, v, p);
